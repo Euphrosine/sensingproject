@@ -84,17 +84,7 @@ WSGI_APPLICATION = 'sensing_project.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'sensorprojectdb',
-#         'USER': 'sensorprojectdb_user',
-#         'PASSWORD': 'xMA4UE0Rw8gnSwCX5GAAW4b0ws7UaGVJ',
-#         'HOST': 'dpg-ckrqdkg5vl2c738b8370-a',
-#         'PORT': '5432',
 
-#     }
-# }
 DATABASES = {
     'default': dj_database_url.config(default='postgres://sensorprojectdb_user:xMA4UE0Rw8gnSwCX5GAAW4b0ws7UaGVJ@dpg-ckrqdkg5vl2c738b8370-a.oregon-postgres.render.com/sensorprojectdb')
 }

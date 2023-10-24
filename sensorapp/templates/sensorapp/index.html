@@ -85,7 +85,7 @@
                 {% for data in sensor_data %}
                     <tr>
                         <td>{{ data.datetime }}</td>
-                        <td style="color: {% if data.activity == 'Unauthorized person trying to enter the car' %}#ff5733{% else %}#33cc33{% endif %};">{{ data.activity }}</td>
+                        <td>{{ data.activity }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -15,9 +15,14 @@ def sensor_data_view(request):
     activity = ""
 
     if status == "1":
-        activity = "Unauthorized person trying to enter the car"
-    elif status == "11":
-        activity = "Unknown person trying to enter the car"
+        activity = "Unauthorized person trying to enter the car with fingerprint"
+    elif status == "2":
+        activity = "Unknown person is coming near your car"
+    
+    if status == "3":
+        activity = "Unkown person is passing near your car"
+    elif status == "4":
+        activity = "Unknown person touched your car"
     
     # Create a dictionary to store the data you want to save
     data_to_save = {
