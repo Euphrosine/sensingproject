@@ -13,20 +13,27 @@ def sensor_data_view(request):
 
     # Initialize param2 (activity) with an empty string
     activity = ""
+    sensor = ""
 
     if status == "1":
         activity = "Unauthorized person trying to enter the car with fingerprint"
+        sensor = "Fingerprint"
     elif status == "2":
         activity = "Unknown person is coming near your car"
+        sensor = "Aproximity"
     
     if status == "3":
         activity = "Unkown person is passing near your car"
+        sensor = "Motion"
+
     elif status == "4":
         activity = "Unknown person touched your car"
+        sensor = "Touch"
     
     # Create a dictionary to store the data you want to save
     data_to_save = {
         'datetime': timezone.now(),
+        'sensor' : sensor,
         'activity': activity,
         'status': status
     }
@@ -38,7 +45,7 @@ def sensor_data_view(request):
     sensor_data = SensorData.objects.all()
 
     # Convert the data to JSON format
-    response_data = [{'datetime': entry.datetime, 'activity': entry.activity, 'status': entry.status} for entry in sensor_data]
+    response_data = [{'datetime': entry.datetime, 'sensor': entry.sensor,'activity': entry.activity, 'status': entry.status} for entry in sensor_data]
 
     return JsonResponse(response_data, safe=False)
 

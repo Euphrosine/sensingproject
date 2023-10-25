@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'sensing_project.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://sensorprojectdb_user:xMA4UE0Rw8gnSwCX5GAAW4b0ws7UaGVJ@dpg-ckrqdkg5vl2c738b8370-a.oregon-postgres.render.com/sensorprojectdb')
+    'default': dj_database_url.config(default='postgresql://postgres:mqORmUcjIlzz5Fi3OSZt@containers-us-west-40.railway.app:7501/railway')
 }
 
 # Password validation

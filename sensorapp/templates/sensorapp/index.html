@@ -78,6 +78,7 @@
             <thead>
                 <tr>
                     <th>Date & Time</th>
+                    <th>Sensor Type</th>
                     <th>Activity</th>
                 </tr>
             </thead>
@@ -85,6 +86,7 @@
                 {% for data in sensor_data %}
                     <tr>
                         <td>{{ data.datetime }}</td>
+                        <td>{{ data.sensor }}</td>
                         <td>{{ data.activity }}</td>
                     </tr>
                 {% endfor %}
