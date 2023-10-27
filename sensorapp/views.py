@@ -1,8 +1,12 @@
+import json
+
 from django.http import JsonResponse
 from .models import SensorData
 from django.utils import timezone
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+
 
 
 
@@ -54,6 +58,36 @@ def sensor_html_view(request):
     sensor_data = SensorData.objects.all()
     return render(request, 'sensorapp/index.html', {'sensor_data': sensor_data})
 
+
+
+def dashboard(request):
+    data = SensorData.objects.values('datetime', 'sensor', 'status').order_by('datetime')
+
+    # Prepare data for chart
+    chart_data = {}
+
+    for entry in data:
+        timestamp = entry['datetime'].strftime('%Y-%m-%d %H:%M:%S')
+        sensor_type = entry['sensor']
+        status = entry['status']
+
+        if sensor_type not in chart_data:
+            chart_data[sensor_type] = {'timestamps': [], 'statuses': []}
+
+        chart_data[sensor_type]['timestamps'].append(timestamp)
+        chart_data[sensor_type]['statuses'].append(status)
+
+    return render(request, 'sensorapp/dashboard.html', {'chart_data': chart_data})
+
+
+
+def table_view(request):
+    sensor_data = SensorData.objects.all()
+    return render(request, 'sensorapp/table.html', {'sensor_data': sensor_data})
+
+def line_chart_data(request):
+    data = SensorData.objects.values('datetime', 'sensor')
+    return data
 
 
 from .utils import generate_sensor_data_report

@@ -1,0 +1,23 @@
+{% extends 'sensorapp/base.html' %}
+
+{% block content %}
+    <h1>Sensor Data Table</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Sensor Type</th>
+                <th>Activity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in sensor_data %}
+                <tr>
+                    <td>{{ entry.datetime }}</td>
+                    <td>{{ entry.sensor }}</td>
+                    <td>{{ entry.activity }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
