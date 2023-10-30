@@ -56,8 +56,17 @@ def sensor_data_view(request):
 
 #table
 def display_chart_data(request):
+    touch_count = SensorData.objects.filter(sensor='Touch').count()
+    aproximity_count = SensorData.objects.filter(sensor='Aproximity').count()
+    motion_count = SensorData.objects.filter(sensor='Motion').count()
+    fingerprint_count = SensorData.objects.filter(sensor='Fingerprint').count()
     sensor_data = SensorData.objects.all()
-    context = {'sensor_data': sensor_data}
+
+    context = {'sensor_data': sensor_data,
+        'touch_count': touch_count,
+        'aproximity_count': aproximity_count,
+        'motion_count': motion_count,
+        'fingerprint_count': fingerprint_count,}
     return render(request, 'sensorapp/chart_data_view.html', context)
 
 
