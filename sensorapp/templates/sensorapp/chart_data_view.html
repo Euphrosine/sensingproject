@@ -1,0 +1,131 @@
+{% extends 'partials/base.html' %}
+{% block content %}
+<br>
+<!-- <h4 id="latest_entry">Latest Entry</h4>
+<br><br>
+<div class="row">
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">BMI</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Latest Heart Rate</p>
+            <h4 class="mb-0" id="latest_bim"></h4>
+          </div>
+          <hr class="dark horizontal my-0">
+          <div class="card-footer p-3">
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">Temp</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Latest Temperature</p>
+            <h4 class="mb-0" id="latest_temp"></h4>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer p-3">
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">MB</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Latest Mvt Bends</p>
+            <h4 class="mb-0" id="latest_strick"></h4>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer p-3">
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">BP</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Latest Blood Pressure</p>
+            <h4 class="mb-0" id="latest_bp"></h4>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer p-3">
+        </div>
+      </div>
+    </div>
+</div> -->
+
+<div class="container mt-5">
+    <h4 id="health_data">Sensor Data</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Status</th>
+                <th>Sensor Type</th>
+                <th>Activity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in sensor_data %}
+                <tr>
+                    <td>{{ entry.datetime }}</td>
+                    <td>{{ entry.status }}</td>
+                    <td>{{ entry.sensor }}</td>
+                    <td>{{ entry.activity }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table><br><br>
+</div>
+<canvas id="sensorChart" width="400" height="250"></canvas>
+
+<script>
+    var ctx = document.getElementById('sensorChart').getContext('2d');
+    var sensorChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [{% for entry in sensor_data %} '{{ entry.sensor }}', {% endfor %}],
+            datasets: [{
+                label: '# of Status',
+                data: [{% for entry in sensor_data %} {{ entry.status }}, {% endfor %}],
+                backgroundColor: [
+                     'rgb(0, 0, 179)'
+                ],
+                borderColor: [
+                    // 'rgba(255, 99, 132, 1)',
+                    // 'rgba(54, 162, 235, 1)',
+                    // 'rgba(255, 206, 86, 1)',
+                    'rgb(37,37,39)'
+                ],
+                borderWidth: 1
+                
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}
