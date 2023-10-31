@@ -139,6 +139,6 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
 
 
-LOGIN_REDIRECT_URL = 'sensor_chart_data'
+LOGIN_REDIRECT_URL = '/'
 
-LOGIN_URL = 'login'
+
