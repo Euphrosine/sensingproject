@@ -54,7 +54,7 @@ def sensor_data_view(request):
     return JsonResponse(response_data, safe=False)
 
 
-#table
+@login_required
 def display_chart_data(request):
     touch_count = SensorData.objects.filter(sensor='Touch').count()
     aproximity_count = SensorData.objects.filter(sensor='Aproximity').count()
@@ -72,15 +72,6 @@ def display_chart_data(request):
 
 from .utils import generate_sensor_data_report
 
-def my_report_view(request):
-    # Get the data you want to include in the report
-    sensor_data = SensorData.objects.all()  # or some other query to get the data
-
-    # Generate the PDF report
-    pdf_response = generate_sensor_data_report(sensor_data)
-
-    # Return the PDF response
-    return pdf_response
 
 def generate_sensor_data_report_view(request):
     sensor_data = SensorData.objects.all()
