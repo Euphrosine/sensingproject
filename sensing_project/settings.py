@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'sensing_project.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgresql://postgres:mqORmUcjIlzz5Fi3OSZt@containers-us-west-40.railway.app:7501/railway')
+    'default': dj_database_url.config(default='mysql://root:g3CG6-f1ggca-gffAhgach1aCad6BA1e@monorail.proxy.rlwy.net:35632/railway')
 }
 
 # Password validation
@@ -137,8 +137,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
+from django.urls import reverse_lazy
 
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'display_chart_data'
+
 
 
