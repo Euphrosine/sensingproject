@@ -86,11 +86,17 @@ WSGI_APPLICATION = 'sensing_project.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-
 DATABASES = {
-    'default': dj_database_url.config(default='mysql://root:g3CG6-f1ggca-gffAhgach1aCad6BA1e@monorail.proxy.rlwy.net:35632/railway')
-}
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'carproject',
+        'USER': 'admin',
+        'PASSWORD': 'admin123',
+        'HOST': 'mysql-153418-0.cloudclusters.net',
+        'PORT': '19069',
 
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
