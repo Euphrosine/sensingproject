@@ -12,7 +12,7 @@ def generate_sensor_data_report(sensor_data):
     p.setFont("Helvetica-Bold", 18)
 
     # Draw the title
-    p.drawString(40, 800, "Sensor Data Report")
+    p.drawString(70, 1000, "Sensor Data Report")
 
     # Set the font back to regular
     p.setFont("Helvetica", 12)

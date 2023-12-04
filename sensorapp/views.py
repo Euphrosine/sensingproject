@@ -18,7 +18,7 @@ def sensor_data_view(request):
         activity = "Unauthorized person trying to enter the car with fingerprint"
         sensor = "Fingerprint"
     elif status == "2":
-        activity = "Unkown person is passing near your car"
+        activity = "Unkown person is inside your car"
         sensor = "Motion"
     elif status == "3":
         activity = "Unknown person touched your car"
@@ -58,7 +58,32 @@ def display_chart_data(request):
 
     return render(request, 'sensorapp/chart_data_view.html', context)
 
+def display_sensor_charts(request):
+    # Get data for Motion sensor
+    motion_data = SensorData.objects.filter(sensor='Motion')
+    motion_labels = [entry.datetime.strftime("%H:%M:%S") for entry in motion_data]
+    motion_values = [entry.status for entry in motion_data]
 
+    # Get data for Touch sensor
+    touch_data = SensorData.objects.filter(sensor='Touch')
+    touch_labels = [entry.datetime.strftime("%H:%M:%S") for entry in touch_data]
+    touch_values = [entry.status for entry in touch_data]
+
+    # Get data for Fingerprint sensor
+    fingerprint_data = SensorData.objects.filter(sensor='Fingerprint')
+    fingerprint_labels = [entry.datetime.strftime("%H:%M:%S") for entry in fingerprint_data]
+    fingerprint_values = [entry.status for entry in fingerprint_data]
+
+    context = {
+        'motion_labels': motion_labels,
+        'motion_values': motion_values,
+        'touch_labels': touch_labels,
+        'touch_values': touch_values,
+        'fingerprint_labels': fingerprint_labels,
+        'fingerprint_values': fingerprint_values,
+    }
+
+    return render(request, 'sensorapp/sensor_charts.html', context)
 
 from .utils import generate_sensor_data_report
 
